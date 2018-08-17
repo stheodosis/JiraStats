@@ -1,0 +1,12 @@
+apiclient
+google-api-python-client
+jira
+jira-cycle-extract
+jsonpath
+jsonpath-rw
+oauth2client
+oauthlib
+PyYAML
+requests
+requests-oauthlib
+ruamel.yaml

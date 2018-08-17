@@ -1,0 +1,84 @@
+---
+JiraURL: https://upstreamsystems.atlassian.net
+TempoURL: /rest/tempo-timesheets/3/worklogs/
+JiraUser: 'a user'
+JiraPass: 'a pass'
+NumResults: 50
+
+proxies:
+  http: 10.9.135.159:3128
+  https: 10.9.135.159:3128
+
+reports:
+  - name: UXE
+    TempoTeamId: 13
+    Spreadsheet: 1ZnOiW2QcRCF_ZhyMLFMnn7m0D_4_c87hBlAG7TpPcME
+    Sheet: RawData
+    jql: 36404
+    queryFields: project,customfield_11002,key,summary,issuetype,
+                 status,resolution,assignee,reporter,created,
+                 resolutiondate,customfield_10602,customfield_14001,
+                 timespent,customfield_12101,labels,timetracking,customfield_10006
+    fields:
+      - name: Project name
+        path: fields.project.name
+        type: string
+      - name: 3 Letter Code
+        path: fields.customfield_11002.[*].value
+        type: string
+        req: '\(([A-Z]+)\)'
+      - name: Project ID
+        path: fields.customfield_11002.[*].value
+        type: string
+      - name: Key
+        path: key
+        type: string
+      - name: Summary
+        path: fields.summary
+        type: string
+      - name: Issue Type
+        path: fields.issuetype.name
+        type: string
+      - name: Status
+        path: fields.status.name
+        type: string
+      - name: Resolution
+        path: fields.resolution.name
+        type: string
+      - name: Assignee
+        path: fields.assignee.name
+        type: string
+      - name: Reporter
+        path: fields.reporter.name
+        type: string
+      - name: Created
+        path: fields.created
+        type: Date
+        format: "%d/%m/%Y"
+      - name: Resolution Date
+        path: fields.resolutiondate
+        type: Date
+        format: "%d/%m/%Y"
+      - name: Requested Due Date
+        path: fields.customfield_10602
+        type: Date
+        format: "%d/%m/%Y"
+      - name: Delay Reason
+        path: fields.customfield_14001.value
+        type: string
+      - name: Time Spent
+        path: fields.timespent
+        type: Seconds
+      - name: Region
+        path: fields.customfield_12101.value
+        type: string
+      - name: Labels
+        path: fields.labels.[*]
+        type: string
+      - name: Original Estimate
+        path: fields.timetracking.originalEstimateSeconds
+        type: Seconds
+      - name: Sprint
+        type: string
+        path: fields.customfield_10006.[*]
+        req: 'name=(UxE Sprint \(\d+\/\d+-\d+\/\d+\))'
